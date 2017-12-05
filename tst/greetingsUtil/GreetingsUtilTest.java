@@ -9,7 +9,7 @@ public class GreetingsUtilTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		gu = new GreetingsUtil();
+		
 	}
 
 
@@ -20,71 +20,36 @@ public class GreetingsUtilTest {
 
 	@Before
 	public void setUp() throws Exception {
+		gu = new GreetingsUtil();
 	}
 
 
 	@After
 	public void tearDown() throws Exception {
+		gu = null;
 	}
+//* Tests must cover each decision in the code
 
 	@Test
-	public void test() {
+	public void testDecisions() {
 		//fail("your tests here");
-	}
-
-	@Test 
-	public void testChangeState() {
-		String expected = "coming";
-		String actual = gu.currentState;
-		assertTrue("Expected: " + expected + " Actual: "+actual, expected.equals(actual));
-		
-		expected = "going";
+		assertEquals("You already said that",gu.Hello());
 		gu.ChangeState();
-		actual = gu.currentState;
-		assertTrue("Expected: " + expected + " Actual: "+actual, expected.equalsIgnoreCase(actual));
+		assertEquals("going",gu.currentState);
+		assertEquals("You already said that",gu.GoodBye());
+	}
+//	* Tests must cover all statements in the code
+	@Test
+	public void testStatements() {
+		//fail("your tests here");
+		assertEquals("You already said that",gu.Hello());
+		assertEquals("bye",gu.GoodBye());
+		assertEquals("You already said that",gu.GoodBye());
+		assertEquals("Hi!",gu.Hello());
 		
-		expected = "coming";
-		gu.ChangeState ();
-		actual = gu.currentState;
-		assertTrue("Expected:" + expected + " Actual: "+actual, expected.equals(actual));
-	}
-	
-	@Test 
-	public void testHello() {
-		String expected;
-		String actual;
-		String state = gu.currentState;
-		if (state.equals("coming")) {
-			expected = "You already said that";
-			actual = gu.Hello();
-			assertEquals("Expected: " + expected + " Actual: " +actual, expected, actual);
-		}else {
-			expected = "Hi!";
-			actual = gu.Hello();
-			assertEquals ("Expected: " + expected + " Actual: "+actual, expected, actual);
-			expected = "coming";
-			actual = gu.currentState;
-			assertEquals ("Expected: " + expected + " Actual: "+actual, expected, actual);
-		}
-	}
-	
-	public void testGoodBye() {
-		String expected;
-		String actual;
-		String state = gu.currentState;
-		if (state.equals("going")) {
-			expected = "You already said that";
-			actual = gu.Hello();
-			assertEquals ("Expected: " +expected + "Actual: " +actual, expected, actual);
-		} else {
-			expected = "bye";
-			actual = gu.Hello();
-			assertEquals("Expected:" + expected + "Actual: "+actual, expected, actual);
-			expected = "going";
-			actual = gu.currentState;
-			assertEquals("Expected:" + expected + "Actual: "+actual, expected, actual);
-		}
-	}
+		gu.ChangeState();
+		gu.ChangeState();
+	}	
 }
 
 
